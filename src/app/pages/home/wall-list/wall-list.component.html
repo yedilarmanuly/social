@@ -1,0 +1,50 @@
+<br>
+
+<h4>
+  Всего записей: {{postData.response.count}}
+</h4>
+
+<ul class="list-group">
+
+  <li class="list-group-item" *ngFor="let item of postData.response.items">
+
+    <div class="hide-text" *ngIf="item.text !== ''">{{item.text}}</div>
+    <div *ngIf="item.text === ''">
+      <ng-container *ngIf="item.attachments && item.attachments[0]" [ngSwitch]="item.attachments[0].type">
+        <ng-container *ngSwitchCase="'link'">
+          <p>Ссылка: {{item.attachments[0].link.caption}}</p>
+          <p>Описание: {{item.attachments[0].link.description}}</p>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <hr>
+
+    <div class="flex">
+      <div class="flex-item">
+        <strong>Просмотров:</strong> {{item.views.count ? item.views.count : 0}}
+      </div>
+      <div class="flex-item">
+        <strong>Лайков:</strong> {{item.likes.count ? item.likes.count : 0}}
+      </div>
+      <div class="flex-item">
+        <strong>Комментарии:</strong> {{item.comments.count ? item.comments.count : 0}}
+      </div>
+      <div class="flex-item">
+        <strong>Поделились:</strong> {{item.reposts.count ? item.reposts.count : 0}}
+      </div>
+      <div class="flex-item">
+        <strong>Вложении:</strong> {{(item.attachments && item.attachments.length) ? item.attachments.length : 0}}
+      </div>
+      <div class="flex-item">
+        <strong>Опубликован:</strong> {{item.date | momentPipe}}
+      </div>
+    </div>
+
+    <br>
+
+    <button class="btn btn-info btn-sm" routerLink="/post/{{item.owner_id}}_{{item.id}}}">Выбрать этот пост</button>
+
+  </li>
+
+</ul>

@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+.btn {
+  margin: 10px 10px 10px 0;
+}
+
+h3 {
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.title-block {
+  position: relative;
+}
+
+.title-block .btn-box {
+  display: flex;
+  position: absolute;
+  right: 0;
+  top: 1px;
+}
+
+.loader {
+  width: 200px;
+}
+
+.users-box {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.users-box .ub-item {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #4c6fcc;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 15px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.users-box .ub-item:last-child {
+  margin-right: 0;
+}

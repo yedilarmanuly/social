@@ -1,0 +1,68 @@
+<h1>Information about the post</h1>
+<hr>
+
+<ng-container *ngIf="postData">
+  <div>
+    <img
+      alt="photo"
+      class="photo"
+      *ngIf="checkImage(postData)"
+      [src]="postData.attachments[0].photo.sizes[7].url"
+    >
+  </div>
+  <p [innerText]="postData.text"></p>
+
+
+  <h3>General statistics</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-bordered">
+        <tr>
+          <th>Views:</th>
+          <td>{{postData.views.count ? postData.views.count : 0}}</td>
+        </tr>
+        <tr>
+          <th>Likes:</th>
+          <td>{{postData.likes.count ? postData.likes.count : 0}}</td>
+        </tr>
+        <tr>
+          <th>Comments:</th>
+          <td>{{postData.comments.count ? postData.comments.count : 0}}</td>
+        </tr>
+        <tr>
+          <th>Shared:</th>
+          <td>{{postData.reposts.count ? postData.reposts.count : 0}}</td>
+        </tr>
+        <tr>
+          <th>Attachment:</th>
+          <td>{{(postData.attachments && postData.attachments.length) ? postData.attachments.length : 0}}</td>
+        </tr>
+        <tr>
+          <th>Published:</th>
+          <td>{{postData.date | momentPipe}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <canvas
+        baseChart
+        [chartType]="chartType"
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="true"
+      ></canvas>
+    </div>
+  </div>
+
+
+
+  <app-analysis-comment [postData]="postData"></app-analysis-comment>
+
+
+  <app-analysis-like [postData]="postData"></app-analysis-like>
+  
+  
+  <app-analysis-text [postData]="postData"></app-analysis-text>
+
+</ng-container>

@@ -1,0 +1,84 @@
+<h2 class="group-title">Group: {{groupInfo.name}}</h2>
+<table class="table table-bordered">
+  <tr>
+    <th style="width: 20%;">Сommunity name:</th>
+    <td>{{groupInfo.name}}</td>
+  </tr>
+  <tr>
+    <th>Community Description:</th>
+    <td>{{groupInfo.description}}</td>
+  </tr>
+  <tr>
+    <th>Short name:</th>
+    <td>{{groupInfo.screen_name}}</td>
+  </tr>
+  <tr>
+    <th>Community photo:</th>
+    <td>
+      <img [src]="groupInfo.photo_200" alt="">
+    </td>
+  </tr>
+  <tr>
+    <th>Community access:</th>
+    <td>
+      <span *ngIf="groupInfo.is_closed === 0">open</span>
+      <span *ngIf="groupInfo.is_closed === 1">closed</span>
+      <span *ngIf="groupInfo.is_closed === 2">private</span>
+    </td>
+  </tr>
+  <tr>
+    <th>Сommunity type:</th>
+    <td>
+      <span *ngIf="groupInfo.type === 'group'">group</span>
+      <span *ngIf="groupInfo.type === 'page'">public page</span>
+      <span *ngIf="groupInfo.type === 'event'">event</span>
+    </td>
+  </tr>
+  <tr>
+    <th>Counters:</th>
+    <td>
+      <div class="row">
+        <div class="col-md-6">
+          <div>Photos: {{groupInfo.counters.photos ? groupInfo.counters.photos : 0}}</div>
+          <div>Albums: {{groupInfo.counters.albums ? groupInfo.counters.albums : 0}}</div>
+          <div>Audios: {{groupInfo.counters.audios ? groupInfo.counters.audios : 0}}</div>
+          <div>Video: {{groupInfo.counters.videos ? groupInfo.counters.videos : 0}}</div>
+          <div>Topics: {{groupInfo.counters.topics ? groupInfo.counters.topics : 0}}</div>
+          <div>Documentation: {{groupInfo.counters.docs ? groupInfo.counters.docs : 0}}</div>
+        </div>
+        <div class="col-md-6">
+          <canvas
+            baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [chartType]="pieChartType"
+          ></canvas>
+        </div>
+      </div>
+
+
+    </td>
+  </tr>
+  <tr>
+    <th>Access to the wall:</th>
+    <td>
+      <span *ngIf="groupInfo.wall === 0">off</span>
+      <span *ngIf="groupInfo.wall === 1">open</span>
+      <span *ngIf="groupInfo.wall === 2">limited</span>
+      <span *ngIf="groupInfo.wall === 3">closed</span>
+    </td>
+  </tr>
+  <tr>
+    <th>Verified:</th>
+    <td>
+      <span *ngIf="groupInfo.verified === 0">appear</span>
+      <span *ngIf="groupInfo.verified === 1">not constitute</span>
+    </td>
+  </tr>
+  <tr>
+    <th>Community status:</th>
+    <td>{{groupInfo.status}}</td>
+  </tr>
+</table>
+
+

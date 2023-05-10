@@ -1,0 +1,76 @@
+<h3 class="title-block">
+  <span>Анализ текста</span>
+  <div class="btn-box">
+    <button class="btn btn-secondary btn-sm" (click)="toggleVisible()">Показать/Скрыть</button>
+  </div>
+</h3>
+
+<div class="container" *ngIf="isVisible">
+
+  <button class="btn btn-primary" (click)="analysisPostText()">Анализировать текст поста</button>
+  <button class="btn btn-primary" (click)="analysisTextComments()">Анализировать текст комментариев</button>
+
+  <br>
+  <br>
+
+  <ng-container *ngIf="isAnalysisPostText">
+    <legend class="text-center">Текст: статистика слов</legend>
+    <p>Всего слов в посте: {{wordLength}}</p>
+
+
+    <div class="analys-words">
+      <div class="chart">
+        <canvas
+          baseChart
+          [data]="[goodWords.length, badWords.length]"
+          [labels]="['Хорошие слова', 'Негативные слова']"
+          chartType="pie"
+        ></canvas>
+      </div>
+      <br>
+      <table class="table table-bordered">
+        <tr>
+          <th>Хорошие слова</th>
+          <th>Негативные слова</th>
+        </tr>
+        <tr>
+          <td>
+            <span *ngFor="let el of goodWords">{{el}}, </span>
+          </td>
+          <td>
+            <span *ngFor="let el of badWords">{{el}}, </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+    <p style="font-style: italic;">* В таблице показано слова которая длина больше 3-х символов и количество повторении больше одного.</p>
+    <!-- <table class="table table-bordered">
+      <tr>
+        <th>Слово</th>
+        <th>Кол-во</th>
+      </tr>
+      <ng-container *ngFor="let word of wordStat">
+        <tr *ngIf="word.count > 1">
+          <td>{{word.title}}</td>
+          <td>{{word.count}}</td>
+        </tr>
+      </ng-container>
+    </table> -->
+    <table class="table table-bordered" *ngIf="groupWordsByCount.length">
+      <tr>
+        <th>Кол-во повторении</th>
+        <th>Повторяющиеся элементы</th>
+      </tr>
+      <tr *ngFor="let group of groupWordsByCount">
+        <th>{{group.count}}</th>
+        <td>
+          <span *ngFor="let word of group.data">{{word.title}}, </span>
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+
+
+</div>

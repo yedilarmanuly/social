@@ -1,0 +1,112 @@
+<h3 class="title-block">
+  <span>Like analysis</span>
+  <div class="btn-box">
+    <button class="btn btn-secondary btn-sm" (click)="toggleVisible()" *ngIf="isAnalysisSex || isAnalysisCity || isAnalysisAge">Show/Hide</button>
+    <button class="btn btn-primary btn-sm" (click)="likesGetList()">Get a list of likes</button>
+  </div>
+</h3>
+
+<ng-container *ngIf="isVisible">
+  <ng-container *ngIf="users.length">
+    <p>Total likes: {{postData.likes.count}}</p>
+    <img
+      *ngIf="postData.likes.count !== users.length"
+      style="width: 500px; margin: 0 auto;"
+      src="assets/images/loader2.gif"
+      alt="loader"
+    >
+    <ng-container *ngIf="postData.likes.count === users.length">
+      <div class="users-box">
+        <ng-container *ngFor="let user of users">
+          <a href="http://vk.com/id{{user.id}}" target="_blank" class="ub-item">{{user.first_name}} {{user.last_name}}</a>
+        </ng-container>
+      </div>
+      <button class="btn btn-primary" (click)="analysisSex()">Analyze gender</button>
+      <button class="btn btn-primary" (click)="analysisCity()">Analyze city</button>
+      <button class="btn btn-primary" (click)="analysisAge()">Analyze age</button>
+    </ng-container>
+  </ng-container>
+
+
+  <div class="row" *ngIf="isAnalysisSex">
+    <legend class="text-center">Gender Analysis:</legend>
+    <div class="col-md-4">
+      <table class="table table-bordered">
+        <tr>
+          <th>Men:</th>
+          <td>{{sex.boys}}</td>
+        </tr>
+        <tr>
+          <th>Women:</th>
+          <td>{{sex.girls}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <canvas
+        baseChart
+        [data]="sexPieChartData"
+        [labels]="sexPieChartLabels"
+        chartType="pie"
+      ></canvas>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="row" *ngIf="isAnalysisCity">
+    <legend class="text-center">Analysis by city:</legend>
+    <div class="col-md-4">
+      <table class="table table-bordered" *ngIf="groupCitiesByCount.length">
+        <tr>
+          <th>Number of repetition</th>
+          <th>Repeating elements</th>
+        </tr>
+        <tr *ngFor="let group of groupCitiesByCount">
+          <th>{{group.count}}</th>
+          <td>
+            <span *ngFor="let city of group.data">{{city.title}}, </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <canvas
+        baseChart
+        [data]="cityPieChartData"
+        [labels]="cityPieChartLabels"
+        chartType="pie"
+      ></canvas>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="row" *ngIf="isAnalysisAge">
+    <legend class="text-center">Analysis by age:</legend>
+    <div class="col-md-4">
+      <table class="table table-bordered" *ngIf="groupAgesByCount.length">
+        <tr>
+          <th>Number of repetition</th>
+          <th>Repeating elements</th>
+        </tr>
+        <tr *ngFor="let group of groupAgesByCount">
+          <th>{{group.count}}</th>
+          <td>
+            <span *ngFor="let age of group.data">{{age.age}} age, </span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <canvas
+        baseChart
+        [data]="agePieChartData"
+        [labels]="agePieChartLabels"
+        chartType="pie"
+      ></canvas>
+    </div>
+  </div>
+</ng-container>

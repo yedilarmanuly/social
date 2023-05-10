@@ -1,0 +1,29 @@
+<br>
+
+<div *ngIf="error" class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{error}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<app-search-group
+  *ngIf="!groupInfo"
+  [groupInfo]="groupInfo"
+  (searched)="getGroup($event)"
+></app-search-group>
+
+
+<ng-container *ngIf="groupInfo">
+  <app-group-info [groupInfo]="groupInfo"></app-group-info>
+  <div class="flex">
+    <button (click)="getPosts()" type="button" class="btn btn-primary btn-lg">Получить записи из стены</button>
+    <button (click)="reset()" type="button" class="btn btn-info btn-lg">Искать другую</button>
+  </div>
+</ng-container>
+
+
+<app-wall-list
+  *ngIf="postData"
+  [postData]="postData"
+></app-wall-list>

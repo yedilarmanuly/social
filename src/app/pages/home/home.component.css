@@ -1,0 +1,14 @@
+.flex {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex button {
+  margin-right: 10px;
+}
+
+.flex button:last-child {
+  margin-right: 0;
+}
